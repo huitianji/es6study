@@ -1,0 +1,19 @@
+{
+  "name": "es6study",
+  "version": "0.0.0",
+  "description": "------ es6-demo ----",
+  "main": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huitianji/es6study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huitianji/es6study/issues"
+  },
+  "homepage": "https://github.com/huitianji/es6study"
+}
