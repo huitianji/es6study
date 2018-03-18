@@ -1,0 +1,6 @@
+安装：
+ npm install babel-preset-es2015 --save-dev
+ npm install babel-cli --save-dev
+
+ npm install gulp-load-plugins --save-dev
+ npm install gulp --save-dev

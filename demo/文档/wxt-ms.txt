@@ -1,0 +1,92 @@
+1.json的函数或者方法
+
+//使用json来定义函数,在里面可以定义多个函数
+  var method={
+          add:function(a,b){
+              return a+b;
+          },
+          add2:function(a,b){
+              return a+b;
+          },
+          add3:function(a,b){
+              return a+b;
+          },
+  };
+  var temp = method.add2(31, 4);
+  alert(temp);
+
+
+
+2.除了ajax还有什么刷新页面方式
+
+iframe
+
+3.实现一个三栏布局（用多种方法，float和Flexbox）
+
+.flex-container {
+  display: flex;
+}
+.flex-item{}
+
+
+4.有几种事件，onclick，onblur等
+
+
+5json请求三个api有两个返回有一个没有返回怎么办
+
+
+6.web安全性
+javascript离不开：“<”、“>”、“(”、“）”、“;”...等等，所以我们只需要在输入或输出时对其进行字符过滤或转义处理
+允许可输入的字符串长度限制
+定一定要在Web Server那一端去完成
+7.XSS原理
+
+1.攻击者对某含有漏洞的服务器发起XSS攻击（注入JS代码）
+
+2.诱使受害者打开受到攻击的服务器URL（邮件、留言等，此步骤可选项）
+
+3.受害者在Web浏览器中打开URL，恶意脚本执行。
+
+8.登录页面栏怎么限制只写邮箱或电话 
+
+
+//邮箱规则表达式
+function CheckVal(){
+var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+
+//电话号码规则
+var phone =/^\d{7,8}$/;
+
+if(文本框值=="" || myreg.test(文本框值) ||phone.test(文本框值)){
+   return true; 
+}
+else{
+    alert("输入信息有误");
+    return false;
+}
+}
+
+
+
+
+--------------------------xxx 2-----------------
+
+
+3）CommonJs，AMD，CMD规范(http://blog.csdn.net/vuturn/article/details/51970567)
+该规范的主要内容是：模块必须通过  module.exports导出对外的变量或接口，通过require()来导入其他模块的输出到当前模块。
+
+AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置
+
+define("module", ["dep1", "dep2"], function(d1, d2) {  
+  return someExportedValue;  
+});  
+require(["module", "../file"], function(module, file) { /* ... */ });  
+
+cmd
+
+define(function(require, exports, module) {  
+  var $ = require('jquery');  
+  var Spinning = require('./spinning');  
+  exports.doSomething = ...  
+  module.exports = ...  
+})  

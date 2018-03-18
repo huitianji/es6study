@@ -1,0 +1,17 @@
+1>“标签模板”的一个重要应用，就是过滤 HTML 字符串，防止用户输入恶意内容
+function saferHTML(templateData) {
+            let s = templateData[0];
+            console.log(templateData)
+            for (let i = 1; i < arguments.length; i++) {
+                let arg = String(arguments[i]);
+
+                s += arg.replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+
+                s += templateData[i];
+               //h console.log(templateData[i])
+            }
+            return s;
+        };
+
