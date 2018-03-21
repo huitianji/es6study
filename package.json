@@ -1,25 +1,34 @@
 {
   "name": "es6study",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "------ es6-demo ----",
-  "main": "a.js",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/main.js -o lib/main.es5.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/huitianji/es6study.git"
+    "url": "git+https://github.com/huitianji/es6study.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/huitianji/es6study/issues"
   },
-  "homepage": "https://github.com/huitianji/es6study",
+  "homepage": "https://github.com/huitianji/es6study#readme",
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
     "babel-cli": "^6.26.0",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp": "^3.9.1"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "browserify": "^16.1.1",
+    "eslint": "^4.19.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0-beta.2",
+    "vinyl-source-stream": "^2.0.0",
+    "webpack": "^4.1.1"
   }
 }
