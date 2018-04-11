@@ -461,6 +461,165 @@ JavaScript有两种类型的数据，值类型和引用类型，一般的数字�
 
 
 
+$.ajax({
+    url:'http://www.baidu.com',
+    type:'POST',
+    data:data,
+    cache:true,
+    headers:{},
+    beforeSend：function(){},
+    success:function(){},
+    error:function(){},
+    complete:function(){}
+});
+
+
+
+JavaScript中如何检测一个变量是一个String类型？请写出函数实现
+
+
+方法1、
+function isString(obj){
+    return typeof(obj) === "string"? true: false;
+    // returntypeof obj === "string"? true: false;
+}
+方法2、
+function isString(obj){
+    return obj.constructor === String? true: false;
+}
+方法3.
+function isString(obj){
+     return Object.prototype.toString.call(obj) === "[object String]"?true:false;
+}
+如：
+var isstring = isString('xiaoming');
+console.log(isstring);  // true
+--------------------------------[4]----------------------------------------
+1.什么是vue生命周期 ?
+
+vue实例从被创建到销毁的一系列过程就叫vue生命周期. 也就是从开始创建、初始化数据、编译模版、挂载DOM→渲染、更新、渲染、卸载等一系列过程。
+
+2.axios的特点有哪些
+
+axios是一个基于promise的HTTP库,支持promise的所有API
+它可以拦截请求和响应
+它可以转换请求数据和响应数据,并对响应回来的内容自动转换为json类型的数据
+它安全性更高,客户端支持防御XSRF
+
+3.vue父组件怎么给子组件传值?
+
+父组件的数据要通过prop传到子组件
+
+5.active-class是哪个组件的属性?嵌套路由怎么定义?
+
+vue-router模块的router-link组件
+
+const routes = [
+    { path: "/", redirect: "/home" },//重定向,指向了home组件
+    {
+        path: "/home", component: home,
+       children: [
+           { path: "/home/game", component: game }
+        ]
+   }
+]
+
+6.谈谈javascript数组排序方法sort()的使用,重点介绍参数使用及内部机制?
+
+语法：arrayObject.sort(sortby)
+
+参数sortby可选，规定排序顺序，必须是函数
+
+注：如果调用该方法是没有使用参数，将按字符编码的顺序进行排序，要实现这一点，首先应把数组的元素都转换成字符串，以便进行比较。
+
+如果想按照其他的标准进行排序，就需要两个比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对排序的数字。
+比较函数应该具有两个参数a和b，其返回值如下：
+
+若a<b，则返回一个小于0的值
+
+若a=b，则返回一个0
+
+若a>b，则返回一个大于0的值
+
+
+8.说几条XHTML规范的内容(至少3条)
+
+所有的标记都必须有一个相应的结束标记
+所有标签的元素和属性的名字都必须使用小写
+所有的xml标记都必须合理嵌套
+所有的属性值都必须用引号“”括起来
+所有的<和&特殊符号用编码表示
+给所有属性赋一个值
+
+13.json和jsonp的区别?
+
+json返回的是一串json格式数据；而jsonp返回的是脚本代码（包含一个函数调用）
+
+jsonp的全名叫做json with padding，就是把json对象用符合js语法的形式包裹起来以使其他的网站可以请求到，也就是将json封装成js文件传过去。
+
+
+
+------------------[5]-------------------------------
+Q：什么情况下会碰到跨域问题？有哪些解决方法？
+
+跨域问题是这是浏览器为了安全实施的同源策略导致的，同源策略限制了来自不同源的document、脚本，同源的意思就是两个URL的域名、协议、端口要完全相同。
+script标签jsonp跨域、nginx反向代理、node.js中间件代理跨域、后端在头部信息设置安全域名、后端在服务器上设置cors
+
+Q：如何判断一个变量是对象还是数组？
+
+判断数组和对象分别都有好几种方法，其中用prototype.toString.call()兼容性最好。
+
+function isObjArr(variable){
+     if (Object.prototype.toString.call(value) === "[object Array]") {
+            console.log('value是数组');
+       }else if(Object.prototype.toString.call(value)==='[object Object]'){//这个方法兼容性好一点
+            console.log('value是对象');
+      }else{
+          console.log('value不是数组也不是对象')
+      }
+}
+ps：千万不能使用typeof来判断对象和数组，因为这两种类型都会返回"object"。
+
+
+Q：定时器的执行顺序或机制。
+如果代码中设定了一个setTimeout,那么浏览器便会在合适的时间，将代码插入到任务队列中，如果这个时间设为0，
+就代表立即插入到队列，但不是立即执行，仍要等待前面代码执行完毕。
+所以setTimeout并不能保证执行的时间，是否及时执行取决于javascript 线程拥挤还是空间。
+
+Q：html中title属性和alt属性的区别？
+
+1.<img src="#" alt="alt信息" />
+//1.当图片不输出信息的时候，会显示alt信息 鼠标放上去没有信息，当图片正常读取，不会出现alt信息
+2.<img src="#" alt="alt信息" title="title信息" />
+// 2.当图片不输出信息的时候，会显示alt信息 鼠标放上去会出现title信息
+//当图片正常输出的时候，不会出现alt信息，鼠标放上去会出现title信息
+
+外还有一些关于title属性的知识：
+
+title属性可以用在除了base，basefont，head，html，meta，param，script和title之外的所有标签
+title属性的功能是提示。额外的说明信息和非本质的信息请使用title属性。title属性值可以比alt属性值设置的更长
+title属性有一个很好的用途，即为链接添加描述性文字，特别是当连接本身并不是十分清楚的表达了链接的目的。
+
+Q：标准盒子模型与IE怪异盒子模型
+
+这个问题主要会出现在笔试题上面，比如：
+
+<div style="width:100px;height="100px;border:10px;padding:10px;"></div>
+这个盒子在w3c标准盒子模型和IE的怪异盒子模型下面它的宽度分别是多少？
+
+标准盒子模型：总宽度=content100px+border 10px*2+padding 10px*2 //140px
+怪异盒子模型: 总宽度=content60px+ border 10px*2+padding 10px*2 //100px
+
+ES5的继承和ES6的继承有什么区别？
+ES5的继承实质上是先创建子类的实例对象，然后再将父类的方法添加到this上
+ES6的继承机制完全不同，实质上是先创建父类的实例对象this（所以必须先调用父类的super()方法），然后再用子类的构造函数修改this。
+
+Q：翻转一个字符串
+
+这个问题主要在笔试题碰到的多，思路就是先将字符串转成一个数组，然后用数组的reverse()+join()方法。
+
+let a="hello word";
+let b=[...str].reverse().join("");//drow olleh
 
 
 
@@ -469,3 +628,145 @@ JavaScript有两种类型的数据，值类型和引用类型，一般的数字�
 
 
 
+function getJSON(url) {
+    return new Promise(function(resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        resolve(response);
+                    } catch (e) {
+                        reject(e);
+                    }
+                } else {
+                    reject(new Error(xhr.statusText));
+                }
+            }
+        }
+    })
+}
+
+getJSON(url).then(resp => console.log(resp));
+
+
+
+------------------------[fetch]----------------------------------------
+
+/**
+ * 将对象转成 a=1&b=2的形式
+ * @param obj 对象
+ */
+function obj2String(obj, arr = [], idx = 0) {
+  for (let item in obj) {
+    arr[idx++] = [item, obj[item]]
+  }
+  return new URLSearchParams(arr).toString()
+}
+
+/**
+ * 真正的请求
+ * @param url 请求地址
+ * @param options 请求参数
+ * @param method 请求方式
+ */
+function commonFetcdh(url, options, method = 'GET') {
+  const searchStr = obj2String(options)
+  let initObj = {}
+  if (method === 'GET') { // 如果是GET请求，拼接url
+    url += '?' + searchStr
+    initObj = {
+      method: method,
+      credentials: 'include'
+    }
+  } else {
+    initObj = {
+      method: method,
+      credentials: 'include',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      body: searchStr
+    }
+  }
+  fetch(url, initObj).then((res) => {
+    return res.json()
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * GET请求
+ * @param url 请求地址
+ * @param options 请求参数
+ */
+function GET(url, options) {
+  return commonFetcdh(url, options, 'GET')
+}
+
+/**
+ * POST请求
+ * @param url 请求地址
+ * @param options 请求参数
+ */
+function POST(url, options) {
+  return commonFetcdh(url, options, 'POST')
+}
+
+
+import fetch from 'isomorphic-fetch';
+import fetchJsonp from 'fetch-jsonp';
+
+
+
+
+解决手机端文本框被键盘遮挡问题
+
+/* 判断手机类型*/
+function navtype(){
+var typ='';
+var u = navigator.userAgent;
+if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {//安卓手机
+typ='a';
+} else if (u.indexOf('iPhone') > -1) {//苹果手机
+typ='i';
+} else if (u.indexOf('Windows Phone') > -1) {//winphone手机
+typ='w';
+}
+return typ;
+}
+
+/* 当前系统为安卓或苹果手sm*/
+
+if(navtype()!=''){
+
+$('input').on('focus', function() {
+
+    var height = $(this).offset().top;
+
+    window.setTimeout(function () {
+        document.activeElement.scrollIntoViewIfNeeded();//微信内置浏览器浏览H5页面弹出的键盘遮盖文本框的解决办法
+        $('section').animate({scrollTop : height}, "slow", 500);
+    });
+ };
+
+
+--------------------------------------------------------
+ javascript 怎么将字符串转换为ArrayBuffer
+
+
+ function char2buf(str){
+ var out = new ArrayBuffer(str.length*2);
+ var u16a= new Uint16Array(out);
+ var strs = str.split("");
+ for(var i =0 ; i<strs.length;i++){
+ u16a[i]=strs[i].charCodeAt();
+ }
+ return out;
+ }

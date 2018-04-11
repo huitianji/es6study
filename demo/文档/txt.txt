@@ -15,3 +15,5 @@ function saferHTML(templateData) {
             return s;
         };
 
+品牌 市场 运营 产品功能，模型 战略  商业模式、、
+产品设计、市场定位、团队规模及其技术能力
