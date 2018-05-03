@@ -481,7 +481,7 @@ JavaScript中如何检测一个变量是一个String类型？请写出函数实�
 方法1、
 function isString(obj){
     return typeof(obj) === "string"? true: false;
-    // returntypeof obj === "string"? true: false;
+    // return typeof obj === "string"? true: false;
 }
 方法2、
 function isString(obj){

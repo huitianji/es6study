@@ -1,0 +1,325 @@
+
+[---例子：1---]：
+
+【1】
+if ( foo == 'bar' || foo == 'foobar' || foo == 'foo' )
+{
+//...
+}
+
+就可以写成：
+if ( foo in { 'bar':'', 'foobar':'', 'foo':'' } )
+{
+//...
+}
+
+比如结构元素啊。内敛元素啊。绘图啦。多媒体的应用啦。还有地理定位了。等等
+【2】
+移动设备忽略将页面中的数字识别为电话号码的方法
+
+HTML5 iOS中
+<a  href="tel:1-408-555-5555">1-408-555-5555</a>
+
+<meta name = "format-detection" content = "telephone=no">
+这个关闭不会影响真正电话号码的识别；
+
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="format-detection" content="adress=no">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+
+
+
+
+-------------------------------------------------------------------------------------------
+[---例子：2---]：
+//---（1）
+var c = 1;
+function n(c) {
+    console.log(c);
+    var c = 3;
+}
+n(2);
+
+n == 2
+/
+//-- （2）
+执行顺序先变量后函数
+
+预处理：
+var a = 2
+function fn() {
+    console.log(a)
+    var a = 3
+}
+fn()
+--》 undefined;
+
+//-- (3)
+
+
+
+------------------------------------------------------------------------------------------
+[---例子：3---]：
+1、什么是盒子模型？
+
+在网页中，一个元素占有空间的大小由几个部分构成，其中包括元素的内容（content），元素的内边距（padding），
+元素的边框（border），元素的外边距（margin）四个部分。
+这四个部分占有的空间中，有的部分可以显示相应的内容，而有的部分只用来分隔相邻的区域或区域。
+4个部分一起构成了css中元素的盒模型。
+
+2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
+
+行内元素：a、b、span、img、input、strong、select、label、em、button、textarea
+块级元素：div、ul、li、dl、dt、dd、p、h1-h6、blockquote
+空元素：即系没有内容的HTML元素，例如：br、meta、hr、link、input、img
+
+3.简述一下src与href的区别
+
+href 是指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，用于超链接。
+
+src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；
+在请求src资源时会将其指向的资源下载并应用到文档内，例如js脚本，img图片和frame等元素。
+
+当浏览器解析到该元素时，会暂停其他资源的下载和处理，直到将该资源加载、编译、执行完毕
+，图片和框架等元素也如此，类似于将所指向资源嵌入当前标签内。
+这也是为什么将js脚本放在底部而不是头部。
+
+
+4.怎样添加、移除、移动、复制、创建和查找节点？
+1）创建新节点
+createDocumentFragment() //创建一个DOM片段
+createElement() //创建一个具体的元素
+createTextNode() //创建一个文本节点
+
+2）添加、移除、替换、插入
+appendChild() //添加
+removeChild() //移除
+replaceChild() //替换
+insertBefore() //插入
+
+3）查找
+getElementsByTagName() //通过标签名称
+getElementsByName() //通过元素的Name属性的值
+getElementById() //通过元素Id，唯一性
+
+4、如何消除一个数组里面重复的元素？
+
+var arr1 = [1,2,2,2,3,4,4,4,6,6];
+var arr2 = [];
+
+for (var i = 0, len = arr1.length; i<len; i++) {
+    if ( arr2.indexOf(arr1[i])<0 ) {
+        debugger;
+        arr2.push(arr1[i]);
+    }
+}
+
+es6: new Set(arr1);
+
+5、统计字符串中字母个数或统计最多字母数。
+
+var str = "aaabbbbccdf";
+var obj = {};
+for (var i = 0, len = str.length; i<len; i++){
+    var v = str.charAt(i);
+    if ( obj[v] && obj[v].value == v ){
+        obj[v].count = ++obj[v].count;
+    }else{
+        obj[v] = {};
+        obj[v].count = 1;
+        obj[v].value = v;
+    }
+};
+for ( var key in obj ) {
+    obj[key].value
+    obj[key].count;
+}
+
+6.写一个function，清除字符串前后的空格
+
+String.prototype.Trim = function()
+{
+return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+function trim(s){
+    return s.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+$().trim();
+function trim(str){
+    return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
+}
+
+7、使用正则表达式验证邮箱格式
+
+[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\.[a-zA-Z]+)+
+
+
+
+[---例子：4---]：
+
+1.请编写一个JavaScript函数 parseQueryString，它的用途是把URL参数解析为一个对象，如：
+var url = “http://www.taobao.com/index.php?key0=0&key1=1&key2=2.....”
+var obj = parseQueryString(url);
+alert(obj.key0)? // 输出0
+
+function parseQueryString(url){
+    var result = {};
+    var params = url.split("?")[1].split("&");
+    for ( var i = 0, len = params.length; i<len; i++ ) {
+        var temp = params[i].split("=");
+        result[temp[0]] = temp[1];
+    }
+    return result;
+}
+
+2.
+
+
+
+[---例子：5---]：
+
+1.XHTML和HTML有什么区别
+
+HTML是一种基本的-EB网页设计语言，XHTML是一个基于XML的-置标语言
+最主要的不同：
+XHTML 元素必须被正确地嵌套。
+XHTML 元素必须被关闭。
+标签名必须用小写字母。
+XHTML 文档必须拥有根元素。
+
+2.前端页面有哪三层构成，分别是什么?作用是什么?
+
+结构层 Html 表示层 CSS 行为层 js;
+
+4.什么是语义化的HTML?
+html语义化就是让页面的内容结构化，便于对浏览器、搜索引擎解析；
+在没有样式CCS情况下也以一种文档格式显示，并且是容易阅读的。
+搜索引擎的爬虫依赖于标记来确定上下文和各个关键字的权重，利于 SEO。
+
+5.HTML5 为什么只需要写 !DOCTYPE HTML？
+HTML5 不基于 SGML(标准通用标记语言)，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；
+而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
+
+6.Doctype作用？标准模式与兼容模式各有什么区别?
+
+!DOCTYPE声明位于位于HTML文档中的第一行，处于html 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。
+DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。
+标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。
+在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
+
+7.html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和HTML5？
+
+    HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+    绘画 canvas
+    用于媒介回放的 video 和 audio 元素
+    本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
+    sessionStorage 的数据在浏览器关闭后自动删除
+    语意化更好的内容元素，比如 article、footer、header、nav、section
+    表单控件，calendar、date、time、email、url、search
+    新的技术webworker, websockt, Geolocation
+    移除的元素
+    纯表现的元素：basefont，big，center，font, s，strike，tt，u；
+    对可用性产生负面影响的元素：frame，frameset，noframes；
+    支持HTML5新标签：
+    IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+    可以利用这一特性让这些浏览器支持HTML5新标签，
+    浏览器支持新标签后，还需要添加标签默认的样式：
+
+
+8.请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+
+cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage不会
+sessionStorage和localStorage的存储空间更大；
+sessionStorage和localStorage有更多丰富易用的接口；
+sessionStorage和localStorage各自独立的存储空间；
+
+9.如何实现浏览器内多个标签页之间的通信?
+调用localstorge、cookies等本地存储方式
+
+
+CSS 引入伪类和伪元素的概念是为了实现基于文档树之外的信息的格式化。
+伪类有：:first-child ，:link:，vistited，:hover，:active，:focus，:lang
+伪元素有：:first-line，:first-letter，:before，:after
+
+8.页面导入样式时，使用link和@import有什么区别？
+
+link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
+import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
+
+CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？ CSS3新增伪类有那些？
+
+    id选择器（ # myid）
+    类选择器（.myclassname）
+    标签选择器（div, h1, p）
+    相邻选择器（h1 + p）
+    子选择器（ul > li）
+    后代选择器（li a）
+    通配符选择器（ * ）
+    属性选择器（a[rel = “external”]）
+    伪类选择器（a: hover, li: nth – child）
+    可继承的样式： font-size font-family color, UL LI DL DD DT;
+    不可继承的样式：border padding margin width height ;
+    优先级就近原则，同权重情况下样式定义最近者为准;
+    优先级为:
+    !important >  id > class > tag
+    important 比 内联优先级高
+
+
+
+[---例子：6---]：
+
+4.ajax请求的时候get 和post方式的区别?
+    一个在url后面 一个放在虚拟载体里面
+    有大小限制
+    安全问题
+    应用不同 一个是论坛等只需要请求的，一个是类似修改密码的;
+
+5.call和apply的区别
+    Object.call(this,obj1,obj2,obj3)
+    Object.apply(this,arguments)
+
+
+
+
+
+
+ $(document).click() 在iphone上不触发事件解决办法
+
+
+ 以上代码在电脑浏览器和安卓上都能触发alert事件，但是在ios上却完全没有反应
+ 查阅了很多信息后，说是iphone这些元素上没有click事件，它是touch事件，
+ 就是说如果这个name标签是button的可click事件则是可以触发的，因为div本身默认不可点击
+ 1、有一个解决方法是给这个元素添加css
+ .name{
+ cursor:pointer;
+ }
+ 这样是可以解决的
+ 2、但是如果你觉得粗暴的话，可以将click改为touchstart事件，或者共存
+ $(document).on(“click touchstart”, “.name”, function() {
+ alert(“name”);
+ });
+
+
+
+需满足的验证逻辑:
+
+@之前必须有内容且只能是字母（大小写）、数字、下划线(_)、减号（-）、点（.）
+
+@和最后一个点（.）之间必须有内容且只能是字母（大小写）、数字、点（.）、减号（-），且两个点不能挨着
+
+最后一个点（.）之后必须有内容且内容只能是字母（大小写）、数字且长度为大于等于2个字节，小于等于6个字节
+
+^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$
+
+
+
+
+
+
+
+
+
