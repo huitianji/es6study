@@ -372,7 +372,38 @@ function toggleClassTest(){
   <input type = "button" value = "toggleClassTest" onclick = "toggleClassTest();" />
 </body>
 
+--------------------------【javascript--难点】---------------------------
+
+1》实现NumberStack的解答
 
 
-
+function NumberStack(){
+    this.stack=[];//存储栈
+    this.maxStack=[];//辅助栈，从小到大的排序
+}
+NumberStack.prototype.push=function(num){
+    if(Object.prototype.toString.call(num)!="object Number") return false; 
+    this.stack.push(num); 
+    if(!this.maxStack.length){ 
+        this.maxStack.push(num);
+    }else{
+        let len=his.maxStack.length;
+        for(let i=0;i<len;i++){
+            if(num<this.maxStack[i]){
+                this.maxStack.splice(i,0,num);//将num插入maxStack到合适的位置
+                break; 
+            }
+        }
+    }
+} 
+NumberStack.prototype.pop=function(){ 
+    let num=this.stack.pop();
+    this.maxStack.splice(this.maxStack.indexOf(num),1);//将num从maxStack中删除 
+    return num;
+}
+  
+NumberStack.prototype.max=function(n){ 
+    if(n<1||n>this.maxStack.length) return false; 
+    return this.maxStack[this.maxStack.length-n];
+}
 

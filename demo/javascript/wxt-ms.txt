@@ -32,7 +32,7 @@ iframe
 4.有几种事件，onclick，onblur等
 
 
-5json请求三个api有两个返回有一个没有返回怎么办
+5.json请求三个api有两个返回有一个没有返回怎么办
 
 
 6.web安全性
