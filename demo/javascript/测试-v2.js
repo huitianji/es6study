@@ -155,10 +155,30 @@
      newArr.sort(function (a,b){return b-a});
 
 
+ 9、实现全选框联动
+ <div class="wrap">
+ 请选择爱好：<br/>
+ <input type="checkbox" name="choose">跳舞
+ <input type="checkbox" name="choose">跳水
+ <input type="checkbox" name="choose"/>跳棋
+ <input type="checkbox" name="choose"/>跑步<br/>
+ <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()"/>全选/取消
+
 * */
-
-
-
+function DoCheck() {
+    var ch=document.getElementsByName("choose");
+    if(document.getElementsByName("allChecked")[0].checked==true) {
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=true;
+        }
+    }else{
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=false;
+        }
+    }
+}
 
 
 
