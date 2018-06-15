@@ -147,7 +147,7 @@ console.log(add(1, 2, 3, 4)(5));  // 15
 console.log(add(1)(2)(3)(4)(5));  // 15
 
 
-///
+///----ol
 
 var currying = function(fn) {
     var args = [].slice.call(arguments, 1);
@@ -189,12 +189,12 @@ function NumberStack(){
     this.maxStack=[];//辅助栈，从小到大的排序
 }
 NumberStack.prototype.push=function(num){
-    if(Object.prototype.toString.call(num)!="object Number") return false;
+    if(Object.prototype.toString.call(num)!="[object Number]") return false;
     this.stack.push(num);
     if(!this.maxStack.length){
         this.maxStack.push(num);
     }else{
-        let len=his.maxStack.length;
+        let len=this.maxStack.length;
         for(let i=0;i<len;i++){
             if(num<this.maxStack[i]){
                 this.maxStack.splice(i,0,num);//将num插入maxStack到合适的位置
@@ -213,6 +213,11 @@ NumberStack.prototype.max=function(n){
     if(n<1||n>this.maxStack.length) return false;
     return this.maxStack[this.maxStack.length-n];
 }
+
+
+///柯里化---cs
+
+
 
 
 

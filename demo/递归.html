@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    0
+    <div>1
+        <div>2
+            <div>
+                3
+            </div>
+        </div>
+    </div>
+    <div>
+        1
+        <div>
+            2
+        </div>
+    </div>
+</div>
+<div id="root2">
+
+</div>
+
+<script src="jquery1.10.2.min.js"></script>
+
+<script>
+    var oRoot = $("#root");
+    var lep = 0;
+    var arr = [];
+    function rootFun (oRoot) {
+
+        var len = oRoot.length;
+
+        if (len == 0) {
+            return;
+        };
+        for ( var i = 0;i<len ;i++){
+
+            rootFun(oRoot.eq(i).children(),lep++);
+            //oRoot.eq(i).length;
+            //arr.push(oRoot.eq(0).children().length)
+
+        };
+
+
+    };
+    rootFun (oRoot.children());
+    console.log(lep)
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

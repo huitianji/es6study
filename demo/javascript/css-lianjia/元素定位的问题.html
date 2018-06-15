@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body,p,img{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            width: 500px;
+            margin: 0px auto;
+        }
+        .cf:before,.cf:after{
+            display: table;
+            content: " ";
+        }
+        .cf:after{
+            clear: both;
+        }
+        .cf{
+            zoom: 1;;
+        }
+
+        .box{
+            display: flex;
+            padding: 10px;;
+            border: 1px solid #000;;
+        }
+        .box>img{
+            width: 100px;
+            height: 100px;
+            background-color: red;;
+        }
+        .box>p{
+
+            flex: 1;
+            margin-left: 10px;;
+            border: 1px solid grey;
+        }
+
+        .box2{
+            padding: 10px;;
+            border: 1px solid #000;;
+        }
+        .box2>img{
+            float: left;
+            width: 100px;
+            height: 100px;
+
+            background-color: red;;
+        }
+        .box2>p{
+            margin-left: 110px;;
+            border: 1px solid grey;
+        }
+
+
+        .box3{
+            position: relative;
+            padding: 10px;;
+            border: 1px solid #000;;
+        }
+        .box3>img{
+            width: 100px;
+            height: 100px;
+
+            background-color: red;;
+        }
+        .box3>p{
+            position: absolute;
+            left: 120px;;
+            top:10px;
+            right:10px;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="box">
+    <img src="magnifier.jpg">
+    <p>
+        这是p元素
+    </p>
+</div>
+<br>
+<br>
+<hr>
+
+<div class="box2 cf">
+    <img src="magnifier.jpg">
+    <p>
+        这是p元素
+    </p>
+</div>
+
+
+<br>
+<br>
+<hr>
+
+<div class="box3 cf">
+    <img src="magnifier.jpg">
+    <p>
+        这是p元素
+    </p>
+</div>
+
+
+
+
+
+</body>
+</html>

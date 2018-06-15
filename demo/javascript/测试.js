@@ -263,7 +263,7 @@ for (var i = 0; i<newArr.length;i++) {
 
  库方面，java这么多年，库比javascript要多，比如一些图像处理的库java有javascript就没有啊。各种工具都比较成熟，比如openstack，RabbitMQ等。
  当然nodejs的库也不少，尤其是用于网站开发的库。
-
+    path,fs,require
 
 
  【对目前的前端和以前的jsp的看法】
@@ -341,7 +341,8 @@ function solve(obj,tab) {//没有缩进版本的
         for(let i in obj){
             tmp+=addEmpty(tab)+i+",\n";
         }
-    }else{
+    }
+    else{
         for(let i in obj){
             tmp+=addEmpty(tab);
             if(typeof obj[i]!="object"){
@@ -369,6 +370,10 @@ function addEmpty(tab){
 }
 console.log(s);
 //
+//测试
+
+
+
 
 
 

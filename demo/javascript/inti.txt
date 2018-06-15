@@ -28,7 +28,24 @@ HTML5 iOS中
 <meta name="format-detection" content="adress=no">
 <meta name="format-detection" content="telephone=no,email=no,adress=no">
 
-
+//路由：
+var A = {
+    "template":"<div></div>"
+}
+var routes = [
+    {path:"/",redirect:"/a"},
+    {path:"/b",component:A,
+        children:[
+            {path:"m",component:M}
+        ]
+    }
+]
+var router = new VueRouter({
+    routes
+});
+var app = new Vue({
+router,
+});
 
 
 -------------------------------------------------------------------------------------------
@@ -116,6 +133,12 @@ for (var i = 0, len = arr1.length; i<len; i++) {
 }
 
 es6: new Set(arr1);
+Array.from();
+
+//方法--
+arr1.filter(function(value,index,arr){return arr.indexOf(value) === index});
+
+
 
 5、统计字符串中字母个数或统计最多字母数。
 
@@ -321,6 +344,16 @@ Number(12345679).toLocaleString()
 
 "12345678".replace(/\d(?=(?:\d{3})+\b)/g,'$&,');
 
+
+(?=)会作为匹配校验，但不会出现在匹配结果字符串里面
+
+(?:)会作为匹配校验，并出现在匹配结果字符里面，它跟(...)不同的地方在于，不作为子匹配返回。
+
+var data = 'windows 98 is ok';
+data.match(/windows (?=\d+)/);  // ["windows "]
+data.match(/windows (?:\d+)/);  // ["windows 98"]
+data.match(/windows (\d+)/);    // ["windows 98", "98"]
+
 -----原生js实现addclass,removeclass,toggleclasss实例-----
 
 在此写了一个利用原生js来实现对dom元素class的操作方法
@@ -339,18 +372,24 @@ Number(12345679).toLocaleString()
 function hasClass(obj, cls) {
   return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 }
+//
 
+//
 function addClass(obj, cls) {
   if (!this.hasClass(obj, cls)) obj.className += " " + cls;
 }
+//
 
+//
 function removeClass(obj, cls) {
   if (hasClass(obj, cls)) {
     var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
     obj.className = obj.className.replace(reg, ' ');
   }
 }
+//
 
+//
 function toggleClass(obj,cls){
   if(hasClass(obj,cls)){
     removeClass(obj, cls);
@@ -358,9 +397,11 @@ function toggleClass(obj,cls){
     addClass(obj, cls);
   }
 }
+//
 
+//
 function toggleClassTest(){
-  var obj = document. getElementById('test');
+  var obj = document.getElementById('test');
   toggleClass(obj,"testClass");
 }
 </script>
@@ -387,7 +428,7 @@ NumberStack.prototype.push=function(num){
     if(!this.maxStack.length){ 
         this.maxStack.push(num);
     }else{
-        let len=his.maxStack.length;
+        let len=this.maxStack.length;
         for(let i=0;i<len;i++){
             if(num<this.maxStack[i]){
                 this.maxStack.splice(i,0,num);//将num插入maxStack到合适的位置
@@ -407,3 +448,13 @@ NumberStack.prototype.max=function(n){ 
     return this.maxStack[this.maxStack.length-n];
 }
 
+
+////-----------------------------------------------------
+
+$.fn.extend({
+   alertWhileClick:function() {
+         $(this).click(function(){
+                alert($(this).val());
+          });
+    }
+});

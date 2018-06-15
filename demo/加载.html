@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<script>
+    function loadJsAsync(url){
+        var body = document.getElementsByTagName('body')[0];
+        var jsNode = document.createElement('script');
+
+        jsNode.setAttribute('type', 'text/javascript');
+        jsNode.setAttribute('src', url);
+        body.appendChild(jsNode);
+
+        //alert("3333");
+        console.log(jsNode.onload)
+        if (jsNode.onload) {
+            jsNode.onload = function() {
+                // do something
+                alert("1111");
+            }
+        } else {
+            //alert("6666");
+            // ie6, ie7不支持onload的情况
+            jsNode.onreadystatechange = function() {
+                if(jsNode.readyState == 'loaded' || jsNode.readyState == 'complete') {
+                    // 异步js加载完毕
+                    // do something执行操作
+                    alert("2222");
+                }else{
+                    alert("5555");
+                }
+            }
+        }
+    }
+
+    //loadJsAsync("http://www.90758.com/js/m_public_53k.js");
+
+
+</script>
+<script src="jquery1.10.2.min.js"></script>
+<script>
+    $.holdReady(true);    //hold住，等待a.js加载，后续代码不能执行
+    $.getScript('http://www.90758.com/js/m_public_53k.js',function(){
+        console.log(111);
+        $.holdReady(false);     //释放，a.js加载完成，继续执行后续代码
+    });
+</script>
+
+</body>
+</html>

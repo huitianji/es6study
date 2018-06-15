@@ -1,0 +1,167 @@
+//思路
+代码重复的问题相对好解决，尤其是在自己的项目里，各种参数可以通过规范定死，封装一个参数更少的ajax方法就好了
+
+//url：地址
+//data：数据对象，在函数内部会转化成json串，如果没传，表示用GET方法，如果传了，表示用POST方法
+function ajax(url, data, callback) {
+    $.ajax({
+      url: url,
+      type: data == null ? 'GET' : 'POST',
+      dataType: "json",
+      data: data == null ? '' : JSON.stringify(data),
+      async: true,
+      contentType: "application/json",
+      success: function (resp) {
+        callback(resp);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == "401") {
+          window.parent.location = '/enterprise/enterprise_login.html';
+          self.location = '/enterprise/enterprise_login.html';
+        } else {
+          alert(XMLHttpRequest.responseText);
+        }
+      }
+    });
+}
+
+这样只有url，data和callback三个必要的参数要填，其他都定死了
+执行顺序的问题，可以把第二个请求放在第一个请求的回调里，形如：
+ajax('/prefix/entity1/action1',null, function(resp){
+   //do something on response
+   someData.attr1 = resp.attr1;
+   ajax('/prefix/entity2/action2', someData, function(resp){
+     //do something on response
+   }
+};
+
+
+至此问题似乎解决得很完美，但可以想见，如果请求不止两个，而是4、5个，同时还有其他异步操作（比如我们的页面里有Vue对象的初始化），相互之间有依赖关系，光是这样层层叠叠的括号嵌套，就已经让人头晕了。
+需要找到一种方法，让异步调用的表达看起来像同步调用一样。
+
+/、******+++++++++++++++++++++++++++++++++++++++****、/
+
+解决方案
+引入Promise
+其实现代浏览器都已经内置支持了Promise，连第三方库都不需要了，只有IE不行，放弃了
+改造ajax封装函数，在成功的时候调用resolve()，失败的时候调用reject()，并且返回Promise对象
+
+
+function ajax(url, data, callback) {
+  var p = new Promise(function (resolve, reject) {
+    $.ajax({
+      url: url,
+      type: data == null ? 'GET' : 'POST',
+      dataType: "json",
+      data: data == null ? '' : JSON.stringify(data),
+      async: true,
+      contentType: "application/json",
+      success: function (resp) {
+        callback(resp);
+        resolve();
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == "401") {
+          window.parent.location = '/enterprise/enterprise_login.html';
+          self.location = '/enterprise/enterprise_login.html';
+        } else {
+          alert(XMLHttpRequest.responseText);
+        }
+        reject();
+      }
+    });
+  });
+  return p;
+}
+
+修改调用端
+
+ajax('/prefix/entity1/action1',null, function(resp){
+   //do something on response
+   someData.attr1 = resp.attr1;
+}).then(
+   ajax('/prefix/entity2/action2', someData, function(resp){
+     //do something on response
+   }
+).then(
+   initVue() ;
+).then(
+   //do something else
+)
+
+
+/**************+++++++++++++++++++*******************/
+
+使用ES6的Promise完美解决回调地狱
+
+//创建一个Promise实例，获取数据。并把数据传递给处理函数resolve和reject。需要注意的是Promise在声明的时候就执行了。
+var getUserInfo=new Promise(function(resolve,reject){
+    $.ajax({
+        type:"get",
+        url:"index.aspx",
+        success:function(data){
+            if(data.Status=="1"){
+                resolve(data.ResultJson)//在异步操作成功时调用
+            }else{
+                reject(data.ErrMsg);//在异步操作失败时调用
+            }
+        }
+    });
+})
+//另一个ajax Promise对象，
+var getDataList=new Promise(function(resolve,reject){
+    $.ajax({
+        type:"get",
+        url:"index.aspx",
+        success:function(data){
+            if(data.Status=="1"){
+                resolve(data.ResultJson)//在异步操作成功时调用
+            }else{
+                reject(data.ErrMsg);//在异步操作失败时调用
+            }
+        }
+    });
+})
+//Promise的方法then,catch方法
+getUserInfo.then(function(ResultJson){
+    //通过拿到的数据渲染页面
+}).catch(function(ErrMsg){
+    //获取数据失败时的处理逻辑
+})
+//Promise的all方法，等数组中的所有promise对象都完成执行
+Promise.all([getUserInfo,getDataList]).then(function([ResultJson1,ResultJson2]){
+    //这里写等这两个ajax都成功返回数据才执行的业务逻辑
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
